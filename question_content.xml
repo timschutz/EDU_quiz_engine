@@ -7,22 +7,27 @@
 		multi
 		input
 		-->
-		<question type='input' txt="These include labels such as “Suspected Leavers” or “Intellectual Property” to help quickly classify users and assets, allowing easy analysis and monitoring of behaviors." prompt="Choose the best answer">
-			<answer>Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool</answer>
+		<question type='multi' txt="This uses team, department, division, or geographic information to compare a user's behavior to others in the same work organization." prompt="Choose one">
+			<answer>Behavioral Modeling</answer>
+			<answer>Behavioral Comparison</answer>
+			<answer id="correct">Functional Work Modeling</answer>
+			<answer id="correct">Dynamic Peer Grouping</answer>
+			<answer id="correct">Behavioral Comparison</answer>
 		</question>
-		<question type='multi' txt="These put anomalous activity like abnormal access to a database or querying a large amount of data into the context of historic behavior." prompt="Choose the best answer">
-			<answer>Contextual Tags</answer>
-			<answer id="correct">Behavioral Models</answer>
-			<answer id="correct">Behavioral Models</answer>
-			<answer>Rule Tags</answer>
-			<answer>Correlation Rules</answer>
-			<answer id="correct">Behavioral Models</answer>
-		</question>
-		<question type='single' txt="This uses team, department, division, or geographic information to compare a user's behavior to others in the same work organization." prompt="Choose the best answer">
+		<question type='single' txt="These put anomalous activity like abnormal access to a database or querying a large amount of data into the context of historic behavior." prompt="Answer this my good man">
 			<answer>Behavioral Modeling</answer>
 			<answer>Behavioral Comparison</answer>
 			<answer>Functional Work Modeling</answer>
 			<answer id="correct">Dynamic Peer Grouping</answer>
 		</question>
+		<question type='single' txt="These put anomalous activity like abnormal access to a database or querying a large amount of data into the context of historic behavior." prompt="Answer this my good man">
+			<answer>Behavioral Modeling</answer>
+			<answer>Behavioral Comparison</answer>
+			<answer>Functional Work Modeling</answer>
+			<answer id="correct">Dynamic Peer Grouping</answer>
+		</question>
+		<!-- <question type='input' txt="These include labels such as “Suspected Leavers” or “Intellectual Property” to help quickly classify users and assets, allowing easy analysis and monitoring of behaviors." prompt="Choose the best answer">
+			<answer>Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool</answer>
+		</question> -->
 	</allQuestions>
 	

@@ -15,6 +15,8 @@ let STARTbutton = document.getElementById('start');
 let STARTcontainer = document.getElementById('start-container');
 let ANIMcontainer = document.getElementById('q-sheet');
 let Qtracker = document.getElementById('tracker');
+let PROMPTcontainer = document.getElementById('prompt');
+let SUMMcontainer = document.getElementById('summary');
 
 let xml = '';
 let numQuestions = 0;
@@ -42,6 +44,12 @@ document.addEventListener('DOMContentLoaded', ()=>{let url = 'question_content.x
     let qCount = xml.children[0].getElementsByTagName('question');
     numQuestions = qCount.length;
   });
+
+  // inserting the header text for the summary page
+  SUMMcontainer.setAttribute('id', 'summary');
+  let summQuestionHeader = document.createElement('div');
+  summQuestionHeader.setAttribute('id', 'summ-header'); 
+  SUMMcontainer.appendChild(summQuestionHeader); 
 })
 
 // ========================================================
@@ -119,6 +127,15 @@ function buildQuestionElements(x){
   Qcontainer.appendChild(questionBlock);
   gsap.from(Qcontainer, {opacity: 0, scale: 0.2, duration: 1, delay: 1, ease: "expo", onComplete: animQuestion});
 
+  // adding user results to summary div !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  let summQuestionContainer = document.createElement('div');
+  let currQ = 'sq' + qNum;
+  summQuestionContainer.setAttribute('id', currQ);
+  summQuestionContainer.className = 'summ-question';
+  summQuestionContainer.innerHTML = "<span id='q-style'>" + 'Q' + (qNum + 1) + "</span>" + questionData[qNum].getAttribute('txt'); 
+  SUMMcontainer.appendChild(summQuestionContainer); 
+
   let qType = questionData[qNum].getAttribute('type'); 
 
   // extract prompt text
@@ -127,7 +144,7 @@ function buildQuestionElements(x){
   qPrompt.setAttribute('id', 'q-prompt');
   let qText = document.createTextNode(questionData[qNum].getAttribute('prompt'));
   qPrompt.appendChild(qText);
-  Acontainer.appendChild(qPrompt);
+  PROMPTcontainer.appendChild(qPrompt);
   gsap.from(qPrompt, {opacity: 0, duration: 0.8, delay: 2.5, ease: "expo"});
   
   // extract answers text and display
@@ -154,6 +171,7 @@ function buildQuestionElements(x){
       answerList.addEventListener('click', checkIfCorrect, false);
       answerList.innerText = answerData[i].innerHTML;
       Acontainer.appendChild(answerList);
+
       gsap.from(answerList, {opacity: 0, scale: 0.8, duration: 0.8, delay: 3 + (i * 0.1), ease: "expo"});
     }else if(qType == 'multi'){
       // console.log('MULTI');
@@ -216,12 +234,28 @@ function correct(){
 
   for(let i=0; i<remCount; i++){
     remContainer.children[i].removeEventListener('click', checkIfCorrect);
+
     if(remContainer.children[i].id == 'null'){
       remContainer.children[i].className = 'btn-style btn-disabled';
       remContainer.children[i].removeAttribute('onmouseover');
       remContainer.children[i].removeAttribute('onmouseout');
     }
   }
+
+  // adding user results to summary div !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  
+  let currQ = 'sq' + qNum;
+  let qIcon = document.getElementById(currQ);
+  qIcon.classList.add('summ-correct');
+  for(let i=0; i<remCount; i++){
+    let cln = remContainer.children[i].cloneNode(true);
+    cln.classList.add('btn-kill-pointer');
+    SUMMcontainer.appendChild(cln);
+  }
+  let qBorder = document.createElement('div');
+  qBorder.className = 'summ-border';
+  qBorder.innerText = 'AAA';
+  SUMMcontainer.appendChild(qBorder);
 
   showContButton();
   animSuccess();
@@ -257,6 +291,21 @@ function incorrect(x){
   }
 
   x.className = 'buttonIncorrect btn-style btn-fail btn-kill-pointer';
+
+  // adding user results to summary div !!!!!!Q1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  let currQ = 'sq' + qNum;
+  let qIcon = document.getElementById(currQ);
+  qIcon.classList.add('summ-incorrect');
+  for(let i=0; i<remCount; i++){
+    let cln = remContainer.children[i].cloneNode(true);
+    cln.classList.add('btn-kill-pointer');
+    SUMMcontainer.appendChild(cln);
+  }
+  let qBorder = document.createElement('div');
+  qBorder.className = 'summ-border';
+  qBorder.innerText = 'AAA';
+  SUMMcontainer.appendChild(qBorder);
 
   showContButton();
   animFail();
@@ -315,6 +364,10 @@ function checkMultiCorrect(){
   let anyCorrect = true;
 
   for(let i=0; i<remCount; i++){
+    remContainer.children[i].removeAttribute('onmouseover');
+    remContainer.children[i].removeAttribute('onmouseout');
+    remContainer.children[i].removeEventListener('click', multiChoiceClicked); //??????????????????????????????????????????????????????????????????????
+
     if(remContainer.children[i].id == 'correct' && remContainer.children[i].getAttribute('wasClicked') == 'true'){
       remContainer.children[i].className = 'buttonCorrect multi-global btn-multi-selected_correct btn-kill-pointer multi-global-selected';
     }else if(remContainer.children[i].id == 'null' && remContainer.children[i].getAttribute('wasClicked') == 'true'){
@@ -324,10 +377,17 @@ function checkMultiCorrect(){
       anyCorrect = false;
       remContainer.children[i].className = 'buttonCorrect multi-global btn-multi-up_correct btn-kill-pointer';
     }
+    remContainer.children[i].classList.add('btn-kill-pointer');
   }
+
+  let currQ = 'sq' + qNum;
+  let qIcon = document.getElementById(currQ);
+
   if(anyCorrect == true){
     sndCorrect.play();
     animSuccess();
+
+    qIcon.classList.add('summ-correct');
 
     // scorm for mutiple choice
 
@@ -338,7 +398,21 @@ function checkMultiCorrect(){
   }else{
     sndIncorrect.play();
     animFail();
+
+    qIcon.classList.add('summ-incorrect');
   }
+
+  // adding user results to summary div !!!!!!Q1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  for(let i=0; i<remCount; i++){
+    let cln = remContainer.children[i].cloneNode(true);
+    cln.classList.add('btn-kill-pointer');
+    SUMMcontainer.appendChild(cln);
+  }
+  let qBorder = document.createElement('div');
+  qBorder.className = 'summ-border';
+  qBorder.innerText = 'AAA';
+  SUMMcontainer.appendChild(qBorder);
 }
 
 function removeSubmit(){
@@ -485,7 +559,7 @@ function showContButton(){
   contBtn.setAttribute('onmouseover', 'btnBig(this)');
   contBtn.setAttribute('onmouseout', 'btnSm(this)');
   CBcontainer.appendChild(contBtn);
-  gsap.from(contBtn, {opacity: 0, scale: 0.6, duration: 0.6, delay: 1.5, ease: "expo"});
+  gsap.from(contBtn, {opacity: 0, scale: 0.6, duration: 0.6, delay: 0.5, ease: "expo"});
 }
 
 // =======================================================
@@ -500,19 +574,22 @@ function animElementsOff(){
   let animOff = document.getElementById('question');
   gsap.to(animOff, {opacity: 0, scale: 0.4, duration: 0.5, ease: "back.in"});
 
+  let remPrompt = document.getElementById('q-prompt');
+  gsap.to(remPrompt, {opacity: 0, scale: 0.4, duration: 0.5, ease: "back.in"});
+
   let remContainer = document.getElementById('a-text');
   let remCount = remContainer.children.length;
 
   for(let i=0; i<remCount; i++){
-    gsap.to(remContainer.children[i], {opacity: 0, scale: 0.4, duration: 0.5, delay: 0.5 + (i * 0.1), ease: "back.in"});
+    gsap.to(remContainer.children[i], {opacity: 0, scale: 0.4, duration: 0.5, delay: 0.1 + (i * 0.1), ease: "back.in"});
   }
 
   let animContOff = document.getElementById('continueButton');
-  gsap.to(animContOff, {opacity: 0, scale: 0.4, duration: 0.5, delay: 1.5, ease: "back.in", onComplete: removeOldQuestion});
+  gsap.to(animContOff, {opacity: 0, scale: 0.4, duration: 0.5, delay: 0.8, ease: "back.in", onComplete: removeOldQuestion});
 }
 
 // ===========================================================
-// ========= DISPLAY NEXT QUESTION OR COMPLETE SCREEN ========
+// ========= DISPLAY NEXT QUESTION OR SUMMARY SCREEN ========
 // ===========================================================
 
 function removeOldQuestion(){
@@ -523,6 +600,7 @@ function removeOldQuestion(){
 
   document.getElementById('question').remove();
   document.getElementById('continueButton').remove();
+  document.getElementById('q-prompt').remove();
   
   let remContainer = document.getElementById('a-text');
   let remCount = remContainer.children.length;
@@ -546,7 +624,7 @@ function removeOldQuestion(){
 
     bgLoop.pause();
 
-    animSuccess();
+    animIdle();
 
     sndComplete.play();
 
@@ -556,6 +634,16 @@ function removeOldQuestion(){
     finalDiv.className = 'balloon balloon-right';
     finalDiv.innerText = 'Way to go champ! You finished!!';
     Qcontainer.appendChild(finalDiv);
+
+    // summary screen displayed
+
+    let qScores = document.getElementById('summ-header');
+    qScores.innerHTML = 'You got '+ currScore + ' out of ' + numQuestions + ' correct.';
+    document.body.style.overflow = "auto";
+    SUMMcontainer.removeAttribute('summary');
+    SUMMcontainer.setAttribute('id', 'summary-reveal');
+    gsap.from(SUMMcontainer, {opacity: 0, duration: 1.6, ease: "expo"}); 
+
   }else{
     qNum = qNum + 1;
     buildQuestionElements(xml);

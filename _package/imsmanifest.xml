@@ -68,10 +68,22 @@ The XSD files for SCORM 1.2 are not strictly valid and may cause errors in some 
       <file href="audio/450616__breviceps__8-bit-error.mp3"/>
       <file href="audio/535840__evretro__8-bit-mini-win-sound-effect.mp3"/>
       <file href="audio/mfx_tic33.mp3"/>
-      <file href="assets/bg.png"/>
-      <file href="assets/bg.svg"/>
-      <file href="assets/check.svg"/>
-      <file href="assets/close.svg"/>
+      <file href="audio/bg_loop.mp3"/>
+      <file href="audio/bg_loop2.mp3"/>
+      <file href="audio/bg_loop2.ogg"/>
+      <file href="audio/complete.mp3"/>
+      <file href="assets/dot.png"/>
+      <file href="assets/ltbg.png"/>
+      <file href="assets/spritesheet.png"/>
+      <file href="assets/start_peep.png"/>
+      <file href="assets/startbg.png"/>
+      <file href="assets/multi_correct.svg"/>
+      <file href="assets/multi_hover.svg"/>
+      <file href="assets/multi_incorrect.svg"/>
+      <file href="assets/multi_sel.svg"/>
+      <file href="assets/multi_up.svg"/>
+      <file href="assets/summ_correct.svg"/>
+      <file href="assets/summ_incorrect"/>
 		</resource>
 	</resources>
 </manifest>

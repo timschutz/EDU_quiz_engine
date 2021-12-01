@@ -7,27 +7,26 @@
 		multi
 		input
 		-->
-		<question type='multi' txt="This uses team, department, division, or geographic information to compare a user's behavior to others in the same work organization." prompt="Choose one">
-			<answer>Behavioral Modeling</answer>
-			<answer>Behavioral Comparison</answer>
-			<answer id="correct">Functional Work Modeling</answer>
-			<answer id="correct">Dynamic Peer Grouping</answer>
-			<answer id="correct">Behavioral Comparison</answer>
+		<question type='multi' txt="What are some good ways to protect yourself from cyberattacks?" prompt="Choose all that apply">
+			<answer>Only use Chrome browser</answer>
+			<answer>Make sure you are using the latest computer model</answer>
+			<answer id="correct">Use strong passwords</answer>
+			<answer id="correct">Ensure software is always updated</answer>
+			<answer id="correct">Use a VPN</answer>
+			<answer>Use the same password for all of your logins</answer>
 		</question>
-		<question type='single' txt="These put anomalous activity like abnormal access to a database or querying a large amount of data into the context of historic behavior." prompt="Answer this my good man">
-			<answer>Behavioral Modeling</answer>
-			<answer>Behavioral Comparison</answer>
-			<answer>Functional Work Modeling</answer>
-			<answer id="correct">Dynamic Peer Grouping</answer>
+		<question type='single' txt="Which of the following should you do to restrict access to your files and devices?" prompt="Choose one">
+			<answer>Update your software once a year.</answer>
+			<answer>Share passwords only with colleagues you trust.</answer>
+			<answer>Have your staff members access information via an open Wi-Fi network.</answer>
+			<answer id="correct">Use multi-factor authentication.</answer>
 		</question>
-		<question type='single' txt="These put anomalous activity like abnormal access to a database or querying a large amount of data into the context of historic behavior." prompt="Answer this my good man">
-			<answer>Behavioral Modeling</answer>
-			<answer>Behavioral Comparison</answer>
-			<answer>Functional Work Modeling</answer>
-			<answer id="correct">Dynamic Peer Grouping</answer>
+		<question type='single' txt="Backing up important files offline, on an external hard drive or in the cloud, will help protect your business in the event of a cyber attack. True or False?" prompt="Choose one">
+			<answer id="correct">True</answer>
+			<answer>False</answer>
 		</question>
-		<!-- <question type='input' txt="These include labels such as “Suspected Leavers” or “Intellectual Property” to help quickly classify users and assets, allowing easy analysis and monitoring of behaviors." prompt="Choose the best answer">
+		<question type='input' txt="These include labels such as “Suspected Leavers” or “Intellectual Property” to help quickly classify users and assets, allowing easy analysis and monitoring of behaviors." prompt="Type your answer below">
 			<answer>Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool</answer>
-		</question> -->
+		</question>
 	</allQuestions>
 	

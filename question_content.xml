@@ -9,7 +9,7 @@
 		-->
 		<question type='multi' txt="What are some good ways to protect yourself from cyberattacks?" prompt="Choose all that apply">
 			<answer>Only use Chrome browser</answer>
-			<answer>Make sure you are using the latest computer model</answer>
+			<answer>Make sure you are using the latest computer model Make sure you are using</answer>
 			<answer id="correct">Use strong passwords</answer>
 			<answer id="correct">Ensure software is always updated</answer>
 			<answer id="correct">Use a VPN</answer>
@@ -21,12 +21,13 @@
 			<answer>Have your staff members access information via an open Wi-Fi network.</answer>
 			<answer id="correct">Use multi-factor authentication.</answer>
 		</question>
+		<!-- <question type='input' txt="These include labels such as “Suspected Leavers” or “Intellectual Property” to help quickly classify users and assets, allowing easy analysis and monitoring of behaviors." prompt="Type your answer below">
+			<answer>Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool</answer>
+		</question> -->
 		<question type='single' txt="Backing up important files offline, on an external hard drive or in the cloud, will help protect your business in the event of a cyber attack. True or False?" prompt="Choose one">
 			<answer id="correct">True</answer>
 			<answer>False</answer>
 		</question>
-		<question type='input' txt="These include labels such as “Suspected Leavers” or “Intellectual Property” to help quickly classify users and assets, allowing easy analysis and monitoring of behaviors." prompt="Type your answer below">
-			<answer>Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool Integrated Platform allows analysts to seamlessly switch from detection to response without pivoting to a new tool</answer>
-		</question>
+		
 	</allQuestions>
 	

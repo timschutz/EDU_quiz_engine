@@ -28,6 +28,7 @@ let expertInput = '';
 let currScore = 0;
 let passingScore = 0;
 let trackerArray = [];
+let questionType = '';
 
 // =======================================================
 // ===============  INGESTING THE XML  ===================
@@ -77,7 +78,7 @@ function btnSm(btn){
 }
 
 // =======================================================================================
-// =============  FUNCTIONS TO BEGIN THE QUIZ AND REMOVE THE START PAGE  =================
+// ===================  BEGIN THE QUIZ AND REMOVE THE START PAGE  ========================
 // =======================================================================================
 
 function beginQuiz(xml){
@@ -130,13 +131,21 @@ function buildQuestionElements(x){
   // adding user results to summary div !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   let summQuestionContainer = document.createElement('div');
+  let summQuestionNumber = document.createElement('div');
+
   let currQ = 'sq' + qNum;
+
   summQuestionContainer.setAttribute('id', currQ);
   summQuestionContainer.className = 'summ-question';
-  summQuestionContainer.innerHTML = "<span id='q-style'>" + 'Q' + (qNum + 1) + "</span>" + questionData[qNum].getAttribute('txt'); 
+  summQuestionContainer.innerHTML = 'Q' + (qNum + 1); 
   SUMMcontainer.appendChild(summQuestionContainer); 
 
-  let qType = questionData[qNum].getAttribute('type'); 
+  summQuestionNumber.className = 'q-style';
+  summQuestionNumber.innerHTML = questionData[qNum].getAttribute('txt'); 
+  summQuestionContainer.appendChild(summQuestionNumber); 
+
+  let qType = questionData[qNum].getAttribute('type');
+  questionType = qType; 
 
   // extract prompt text
 
@@ -600,7 +609,9 @@ function removeOldQuestion(){
 
   document.getElementById('question').remove();
   document.getElementById('continueButton').remove();
-  document.getElementById('q-prompt').remove();
+  if(questionType != 'input'){
+    document.getElementById('q-prompt').remove();
+  }
   
   let remContainer = document.getElementById('a-text');
   let remCount = remContainer.children.length;
